@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCabins } from '../../services/apiCabin';
 
+// custom hoook for the cabins data.
 export function UseCabin() {
   const {
     isLoading,
@@ -11,5 +12,5 @@ export function UseCabin() {
     queryFn: getCabins,
   });
 
-  return { isLoading, cabins };
+  return { isLoading, error, cabins };
 }

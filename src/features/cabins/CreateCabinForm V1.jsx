@@ -11,7 +11,7 @@ import Textarea from '../../ui/Textarea';
 import { useForm } from 'react-hook-form';
 import { createCabin } from '../../services/apiCabin';
 
-function CreateCabinForm() {
+function CreateCabinForm({ onModalClose }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
 
@@ -24,6 +24,7 @@ function CreateCabinForm() {
           queryKey: ['cabins'],
         });
       reset();
+      onModalClose?.();
     },
     onError: (err) => toast.error(err.message),
   });
@@ -115,7 +116,11 @@ function CreateCabinForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onModalClose?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isCreating}>Add cabin</Button>

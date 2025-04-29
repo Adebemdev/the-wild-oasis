@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
   to {
@@ -8,7 +8,6 @@ const rotate = keyframes`
 
 const Spinner = styled.div`
   margin: 4.8rem auto;
-
   width: 6.4rem;
   aspect-ratio: 1;
   border-radius: 50%;

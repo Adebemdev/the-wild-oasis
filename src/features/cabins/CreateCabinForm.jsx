@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { UseCreateCabin } from './UseCreateCabin';
 import { UseEditCabin } from './UseEditCabin';
 
-function CreateCabinForm({ cabinEdit = {} }) {
+function CreateCabinForm({ cabinEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinEdit;
   const isEditSession = Boolean(editId);
 
@@ -42,6 +42,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
               image: '',
               description: '',
             });
+            onCloseModal?.();
           },
         }
       );
@@ -51,6 +52,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
         {
           onSuccess: () => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -61,7 +63,10 @@ function CreateCabinForm({ cabinEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? 'modal' : 'regular'}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -110,9 +115,12 @@ function CreateCabinForm({ cabinEdit = {} }) {
           defaultValue={0}
           {...register('discount', {
             required: 'This field is required',
-            validate: (value) =>
-              value <= getValues().regularPrice ||
-              'Discount should be less than the regular price!',
+            validate: (value) => {
+              return (
+                Number(value) <= Number(getValues().regularPrice) ||
+                'Discount should be less than the regular price!'
+              );
+            },
           })}
         />
       </FormRow>
@@ -144,7 +152,11 @@ function CreateCabinForm({ cabinEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isCreating}>
