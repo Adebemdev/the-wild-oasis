@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useDarkMode } from '../../context/DarkModeContext';
+import useDarkMode from '../../context/useDarkMode';
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -62,7 +62,6 @@ const SalesChart = ({ bookings, numDays }) => {
     end: new Date(),
   });
 
-  console.log(allDates);
   const data = allDates.map((date) => {
     return {
       label: format(date, 'MM dd'),
