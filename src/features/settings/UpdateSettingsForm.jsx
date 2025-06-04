@@ -1,7 +1,7 @@
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
-import { useSetting } from './useSetting';
+import useSetting from './useSetting';
 import Spinner from '../../ui/Spinner';
 import { useUpdateSetting } from './updateSetting';
 
