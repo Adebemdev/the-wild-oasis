@@ -3,7 +3,7 @@ import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import { useSetting } from './useSetting';
 import Spinner from '../../ui/Spinner';
-import { UseUpdateSetting } from './updateSetting';
+import { useUpdateSetting } from './updateSetting';
 
 function UpdateSettingsForm() {
   const {
@@ -16,7 +16,7 @@ function UpdateSettingsForm() {
     } = {},
   } = useSetting();
 
-  const { isUpdating, updateSetting } = UseUpdateSetting();
+  const { isUpdating, updateSetting } = useUpdateSetting();
 
   if (isLoading) return <Spinner />;
 
